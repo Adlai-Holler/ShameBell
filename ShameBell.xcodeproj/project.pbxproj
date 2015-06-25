@@ -13,6 +13,7 @@
 		CCB336201B3BA55B002D2C2D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CCB3361F1B3BA55B002D2C2D /* Images.xcassets */; };
 		CCB336231B3BA55B002D2C2D /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = CCB336211B3BA55B002D2C2D /* LaunchScreen.xib */; };
 		CCB3362F1B3BA55B002D2C2D /* ShameBellTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB3362E1B3BA55B002D2C2D /* ShameBellTests.swift */; };
+		CCB336391B3BA566002D2C2D /* shame_sfx.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = CCB336381B3BA566002D2C2D /* shame_sfx.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +37,7 @@
 		CCB336281B3BA55B002D2C2D /* ShameBellTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ShameBellTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCB3362D1B3BA55B002D2C2D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CCB3362E1B3BA55B002D2C2D /* ShameBellTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShameBellTests.swift; sourceTree = "<group>"; };
+		CCB336381B3BA566002D2C2D /* shame_sfx.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = shame_sfx.mp3; path = ../../../Downloads/shame_sfx.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +79,7 @@
 		CCB336151B3BA55B002D2C2D /* ShameBell */ = {
 			isa = PBXGroup;
 			children = (
+				CCB3363A1B3BA568002D2C2D /* Resources */,
 				CCB336181B3BA55B002D2C2D /* AppDelegate.swift */,
 				CCB3361A1B3BA55B002D2C2D /* ViewController.swift */,
 				CCB3361C1B3BA55B002D2C2D /* Main.storyboard */,
@@ -110,6 +113,14 @@
 				CCB3362D1B3BA55B002D2C2D /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		CCB3363A1B3BA568002D2C2D /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				CCB336381B3BA566002D2C2D /* shame_sfx.mp3 */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -193,6 +204,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CCB3361E1B3BA55B002D2C2D /* Main.storyboard in Resources */,
+				CCB336391B3BA566002D2C2D /* shame_sfx.mp3 in Resources */,
 				CCB336231B3BA55B002D2C2D /* LaunchScreen.xib in Resources */,
 				CCB336201B3BA55B002D2C2D /* Images.xcassets in Resources */,
 			);
@@ -350,6 +362,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Bitlogica inc.";
 				INFOPLIST_FILE = ShameBell/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
