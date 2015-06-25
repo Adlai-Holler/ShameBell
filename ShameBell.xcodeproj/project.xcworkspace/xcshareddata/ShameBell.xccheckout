@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>98159DB8-1FA2-4194-AEF2-EDCBE5710405</string>
+	<key>IDESourceControlProjectName</key>
+	<string>ShameBell</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>1F7E190CDA1E7DFE46549C3AD663CE35A846B780</key>
+		<string>https://github.com/adly-holler/ShameBell</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>ShameBell.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>1F7E190CDA1E7DFE46549C3AD663CE35A846B780</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/adly-holler/ShameBell</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>1F7E190CDA1E7DFE46549C3AD663CE35A846B780</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>1F7E190CDA1E7DFE46549C3AD663CE35A846B780</string>
+			<key>IDESourceControlWCCName</key>
+			<string>ShameBell</string>
+		</dict>
+	</array>
+</dict>
+</plist>

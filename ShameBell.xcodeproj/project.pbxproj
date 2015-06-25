@@ -13,7 +13,7 @@
 		CCB336201B3BA55B002D2C2D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CCB3361F1B3BA55B002D2C2D /* Images.xcassets */; };
 		CCB336231B3BA55B002D2C2D /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = CCB336211B3BA55B002D2C2D /* LaunchScreen.xib */; };
 		CCB3362F1B3BA55B002D2C2D /* ShameBellTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB3362E1B3BA55B002D2C2D /* ShameBellTests.swift */; };
-		CCB336391B3BA566002D2C2D /* shame_sfx.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = CCB336381B3BA566002D2C2D /* shame_sfx.mp3 */; };
+		CCC89D5A1B3C6E9F00B8B244 /* shame_sfx.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = CCC89D591B3C6E9F00B8B244 /* shame_sfx.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,7 +37,7 @@
 		CCB336281B3BA55B002D2C2D /* ShameBellTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ShameBellTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCB3362D1B3BA55B002D2C2D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CCB3362E1B3BA55B002D2C2D /* ShameBellTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShameBellTests.swift; sourceTree = "<group>"; };
-		CCB336381B3BA566002D2C2D /* shame_sfx.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = shame_sfx.mp3; path = ../../../Downloads/shame_sfx.mp3; sourceTree = "<group>"; };
+		CCC89D591B3C6E9F00B8B244 /* shame_sfx.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = shame_sfx.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,7 +118,7 @@
 		CCB3363A1B3BA568002D2C2D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				CCB336381B3BA566002D2C2D /* shame_sfx.mp3 */,
+				CCC89D591B3C6E9F00B8B244 /* shame_sfx.mp3 */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -204,7 +204,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CCB3361E1B3BA55B002D2C2D /* Main.storyboard in Resources */,
-				CCB336391B3BA566002D2C2D /* shame_sfx.mp3 in Resources */,
+				CCC89D5A1B3C6E9F00B8B244 /* shame_sfx.mp3 in Resources */,
 				CCB336231B3BA55B002D2C2D /* LaunchScreen.xib in Resources */,
 				CCB336201B3BA55B002D2C2D /* Images.xcassets in Resources */,
 			);
@@ -303,7 +303,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -341,7 +341,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -422,6 +422,7 @@
 				CCB336341B3BA55B002D2C2D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		CCB336351B3BA55B002D2C2D /* Build configuration list for PBXNativeTarget "ShameBellTests" */ = {
 			isa = XCConfigurationList;
@@ -430,6 +431,7 @@
 				CCB336371B3BA55B002D2C2D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
