@@ -2,23 +2,6 @@
 import UIKit
 import AVFoundation
 
-final class ActiveView: UIView {
-	static let onColor = UIColor(red: 0.8, green: 0.2, blue: 0.1, alpha: 1)
-	override class func layerClass() -> AnyClass {
-		return CAShapeLayer.self
-	}
-	
-	override func drawRect(rect: CGRect) {
-		ActiveView.onColor.setFill()
-		UIBezierPath(ovalInRect: bounds).fill()
-	}
-	
-	override func intrinsicContentSize() -> CGSize {
-		let dim: CGFloat = 198
-		return CGSize(width: dim, height: dim)
-	}
-}
-
 final class ViewController: UIViewController, AVAudioPlayerDelegate {
 	enum ShameState {
 		case Idle
@@ -55,7 +38,7 @@ final class ViewController: UIViewController, AVAudioPlayerDelegate {
 	
 	let audioPlayer: AVAudioPlayer = AVAudioPlayer(contentsOfURL: NSBundle.mainBundle().URLForResource("shame_sfx", withExtension: "mp3")!, error: nil)
 	@IBOutlet weak var titleLabel: UILabel!
-	let activeView = ActiveView()
+
 	
 	var touchingScreen: Bool {
 		return !touches.isEmpty
@@ -73,15 +56,6 @@ final class ViewController: UIViewController, AVAudioPlayerDelegate {
 		super.viewDidLoad()
 		updateShameState()
 		audioPlayer.delegate = self
-		view.addSubview(activeView)
-		
-		// center active view in self
-		let centerX = NSLayoutConstraint(item: activeView, attribute: .CenterX, relatedBy: .Equal, toItem: view, attribute: .CenterX, multiplier: 1.0, constant: 0)
-		view.addConstraint(centerX)
-		
-		// active view starts at 200pt down from top
-		let topSpace = NSLayoutConstraint(item: activeView, attribute: .Top, relatedBy: .Equal, toItem: view, attribute: .Top, multiplier: 1.0, constant: 200)
-		view.addConstraint(topSpace)
 		
 		view.backgroundColor = UIColor.blackColor()
 		
