@@ -31,7 +31,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="HOLD PHONE UPSIDE DOWN" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1A7-O7-Lj4">
                                 <rect key="frame" x="15" y="20" width="288.5" height="27.5"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="20"/>
-                                <color key="textColor" red="0.38279999999999997" green="0.374" blue="0.44" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="textColor" red="0.38431372549019605" green="0.37254901960784315" blue="0.4392156862745098" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -52,7 +52,7 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="imageView" destination="tiR-Pg-VbT" id="RyR-wR-vgp"/>
-                        <outlet property="orientationLabel" destination="1A7-O7-Lj4" id="Iuf-Yw-Ucd"/>
+                        <outlet property="infoLabel" destination="1A7-O7-Lj4" id="kBv-r2-PtU"/>
                         <outlet property="volumeView" destination="ZKt-Et-OPJ" id="N08-tx-rht"/>
                     </connections>
                 </viewController>

@@ -28,10 +28,17 @@ final class ViewController: UIViewController, AVAudioPlayerDelegate {
 			case .ReadyToShame, .Shame:
 				imageView.alpha = 1
 			}
+			updateInfoLabel()
 		}
 	}
 	
-	@IBOutlet var orientationLabel: UILabel!
+	static let infoAttr = [
+		NSFontAttributeName: UIFont(name: "AvenirNext-Bold", size: 20)!,
+		NSForegroundColorAttributeName: UIColor(red: 0.384, green: 0.373, blue: 0.439, alpha: 1),
+		NSKernAttributeName: 0.3
+	]
+
+	@IBOutlet var infoLabel: UILabel!
 	@IBOutlet var volumeView: MPVolumeView!
 	@IBOutlet var imageView: UIImageView!
 	let audioPlayer = AVAudioPlayer(contentsOfURL: NSBundle.mainBundle().URLForResource("shame_sfx_4", withExtension: "m4a")!, error: nil)
@@ -135,11 +142,37 @@ final class ViewController: UIViewController, AVAudioPlayerDelegate {
 		return false
 	}
 	
-	@objc private func deviceOrientationChanged() {
-		let showLabel = UIDevice.currentDevice().orientation != UIDeviceOrientation.PortraitUpsideDown
+	private func updateInfoLabel() {
+		let text: String?
+		let deviceUpsideDown = UIDevice.currentDevice().orientation == .PortraitUpsideDown
+		let transform = deviceUpsideDown ? CGAffineTransformMakeScale(-1, -1) : CGAffineTransformIdentity
+		switch shameState {
+		case .Shame:
+			text = nil
+		case .ReadyToShame:
+			text = "RING THE BELL"
+		case .Idle:
+			if !deviceUpsideDown {
+				text = "HOLD PHONE UPSIDE DOWN"
+			} else {
+				text = "TAP AND HOLD"
+			}
+		}
+		self.infoLabel.attributedText = NSAttributedString(string: text ?? "", attributes: ViewController.infoAttr)
 		UIView.animateWithDuration(0.4, delay: 0, usingSpringWithDamping: 1.0, initialSpringVelocity: 0.7, options: .BeginFromCurrentState, animations: {
-			self.orientationLabel.alpha = showLabel ? 1 : 0
+			self.infoLabel.transform = transform
+			if let text = text {
+				self.infoLabel.alpha = 1
+			} else {
+				self.infoLabel.alpha = 0
+			}
+			
 		}, completion: nil)
+		
+	}
+	
+	@objc private func deviceOrientationChanged() {
+		updateInfoLabel()
 	}
 	
 	override func supportedInterfaceOrientations() -> Int {
