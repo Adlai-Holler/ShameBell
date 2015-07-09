@@ -1,6 +1,7 @@
 
 import UIKit
 import AVFoundation
+import MediaPlayer
 
 final class ViewController: UIViewController, AVAudioPlayerDelegate {
 	enum ShameState {
@@ -23,20 +24,17 @@ final class ViewController: UIViewController, AVAudioPlayerDelegate {
 		didSet(oldValue) {
 			switch shameState {
 			case .Idle:
-				titleLabel.hidden = true
-			case .ReadyToShame:
-				titleLabel.hidden = false
-				titleLabel.alpha = 0.5
-				titleLabel.text = "Shame?"
-			case .Shame:
-				titleLabel.hidden = false
-				titleLabel.alpha = 1
-				titleLabel.text = "Shame"
+				imageView.alpha = 0.5
+			case .ReadyToShame, .Shame:
+				imageView.alpha = 1
 			}
 		}
 	}
 	
-	let audioPlayer: AVAudioPlayer = AVAudioPlayer(contentsOfURL: NSBundle.mainBundle().URLForResource("shame_sfx", withExtension: "mp3")!, error: nil)
+	@IBOutlet var orientationLabel: UILabel!
+	@IBOutlet var volumeView: MPVolumeView!
+	@IBOutlet var imageView: UIImageView!
+	let audioPlayer = AVAudioPlayer(contentsOfURL: NSBundle.mainBundle().URLForResource("shame_sfx_4", withExtension: "m4a")!, error: nil)
 	@IBOutlet weak var titleLabel: UILabel!
 
 	
@@ -54,12 +52,17 @@ final class ViewController: UIViewController, AVAudioPlayerDelegate {
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		
+		volumeView.showsRouteButton = false
 		updateShameState()
 		audioPlayer.delegate = self
 		
-		view.backgroundColor = UIColor.blackColor()
+		let session = AVAudioSession.sharedInstance()
+		session.setCategory(AVAudioSessionCategoryPlayback, withOptions: .MixWithOthers | .DefaultToSpeaker, error: nil)
+		session.setPreferredOutputNumberOfChannels(1, error: nil)
 		
-		AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback, error: nil)
+		NSNotificationCenter.defaultCenter().addObserver(self, selector: "deviceOrientationChanged", name: UIDeviceOrientationDidChangeNotification, object: UIDevice.currentDevice())
+		deviceOrientationChanged()
 	}
 
 	func audioPlayerDidFinishPlaying(player: AVAudioPlayer!, successfully flag: Bool) {
@@ -122,6 +125,25 @@ final class ViewController: UIViewController, AVAudioPlayerDelegate {
 		for touch in touches {
 			self.touches.remove(touch)
 		}
+	}
+	
+	override func prefersStatusBarHidden() -> Bool {
+		return true
+	}
+	
+	override func shouldAutorotate() -> Bool {
+		return false
+	}
+	
+	@objc private func deviceOrientationChanged() {
+		let showLabel = UIDevice.currentDevice().orientation != UIDeviceOrientation.PortraitUpsideDown
+		UIView.animateWithDuration(0.4, delay: 0, usingSpringWithDamping: 1.0, initialSpringVelocity: 0.7, options: .BeginFromCurrentState, animations: {
+			self.orientationLabel.alpha = showLabel ? 1 : 0
+		}, completion: nil)
+	}
+	
+	override func supportedInterfaceOrientations() -> Int {
+		return UIInterfaceOrientation.Portrait.rawValue | UIInterfaceOrientation.PortraitUpsideDown.rawValue
 	}
 }
 
