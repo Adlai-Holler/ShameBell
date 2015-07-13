@@ -10,19 +10,17 @@
             <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="GSW-1u-g8J">
-                    <rect key="frame" x="230" y="230" width="20" height="20"/>
-                </activityIndicatorView>
-                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="C4G-b7-2ze">
-                    <rect key="frame" x="221.5" y="221.5" width="37" height="37"/>
-                </activityIndicatorView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LOADING…" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jrs-mZ-ypm">
+                    <rect key="frame" x="183" y="176.5" width="114.5" height="27.5"/>
+                    <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="20"/>
+                    <color key="textColor" red="0.38431372549999998" green="0.37254901959999998" blue="0.43921568630000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
-            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstAttribute="centerY" secondItem="GSW-1u-g8J" secondAttribute="centerY" id="12w-4G-cdF"/>
-                <constraint firstAttribute="centerX" secondItem="GSW-1u-g8J" secondAttribute="centerX" id="3gH-ze-b9N"/>
-                <constraint firstAttribute="centerY" secondItem="C4G-b7-2ze" secondAttribute="centerY" id="Gwr-2M-aZY"/>
-                <constraint firstAttribute="centerX" secondItem="C4G-b7-2ze" secondAttribute="centerX" id="m0j-80-oY1"/>
+                <constraint firstAttribute="centerY" secondItem="Jrs-mZ-ypm" secondAttribute="centerY" constant="50" id="QVf-6G-HWC"/>
+                <constraint firstAttribute="centerX" secondItem="Jrs-mZ-ypm" secondAttribute="centerX" id="j7s-AW-eum"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

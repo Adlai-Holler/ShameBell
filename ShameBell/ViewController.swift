@@ -3,31 +3,62 @@ import UIKit
 import AVFoundation
 import MediaPlayer
 
+private let shameLength: NSTimeInterval = 6
+
 final class ViewController: UIViewController, AVAudioPlayerDelegate {
 	enum ShameState {
 		case Idle
 		case ReadyToShame
 		case Shame
 		
-		private init(touchingScreen: Bool, playingAudio: Bool) {
-			if playingAudio {
-				self = .Shame
-			} else if touchingScreen {
-				self = .ReadyToShame
+		var stateByShaking: ShameState {
+			if self == .ReadyToShame {
+				return .Shame
 			} else {
-				self = .Idle
+				return self
 			}
 		}
+
+		var stateByEndingAudio: ShameState {
+			if self == .Shame {
+				return .ReadyToShame
+			} else {
+				return self
+			}
+		}
+		
+		var stateByEndingTouch: ShameState {
+			return .Idle
+		}
+		
+		var stateByBeginningTouch: ShameState {
+			if self == .Idle {
+				return .ReadyToShame
+			} else {
+				return self
+			}
+		}
+
 	}
 	
 	var shameState: ShameState = .Idle {
 		didSet(oldValue) {
+			// Audio player
+			if shameState == .Shame && !audioPlayer.playing {
+				audioPlayer.currentTime = 0
+				audioPlayer.play()
+			} else if shameState != .Shame && audioPlayer.playing {
+				audioPlayer.stop()
+			}
+			
+			// Image view alpha
 			switch shameState {
 			case .Idle:
 				imageView.alpha = 0.5
 			case .ReadyToShame, .Shame:
 				imageView.alpha = 1
 			}
+			
 			updateInfoLabel()
 		}
 	}
@@ -43,25 +74,11 @@ final class ViewController: UIViewController, AVAudioPlayerDelegate {
 	@IBOutlet var imageView: UIImageView!
 	let audioPlayer = AVAudioPlayer(contentsOfURL: NSBundle.mainBundle().URLForResource("shame_sfx_4", withExtension: "m4a")!, error: nil)
 	@IBOutlet weak var titleLabel: UILabel!
-
-	
-	var touchingScreen: Bool {
-		return !touches.isEmpty
-	}
-	
-	var playingAudio: Bool {
-		return audioPlayer.playing
-	}
-	
-	private func updateShameState() {
-		shameState = ShameState(touchingScreen: touchingScreen, playingAudio: playingAudio)
-	}
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
 		volumeView.showsRouteButton = false
-		updateShameState()
 		audioPlayer.delegate = self
 		
 		let session = AVAudioSession.sharedInstance()
@@ -70,50 +87,32 @@ final class ViewController: UIViewController, AVAudioPlayerDelegate {
 		
 		NSNotificationCenter.defaultCenter().addObserver(self, selector: "deviceOrientationChanged", name: UIDeviceOrientationDidChangeNotification, object: UIDevice.currentDevice())
 		deviceOrientationChanged()
+		
+		// force shame state render (ugh)
+		let state = shameState
+		shameState = state
 	}
 
 	func audioPlayerDidFinishPlaying(player: AVAudioPlayer!, successfully flag: Bool) {
-		updateShameState()
+		shameState = shameState.stateByEndingAudio
 	}
 	
 	func audioPlayerBeginInterruption(player: AVAudioPlayer!) {
-		player.stop()
-		updateShameState()
-	}
-	
-	func pauseAudio() {
-		audioPlayer.stop()
-		updateShameState()
-	}
-	
-	func playAudio() {
-		audioPlayer.currentTime = 0
-		audioPlayer.play()
-		updateShameState()
-	}
-	
-	var active = false {
-		didSet {
-			if !active {
-				pauseAudio()
-			}
-		}
+		shameState = shameState.stateByEndingAudio
 	}
 	
 	var touches: Set<NSObject> = [] {
 		didSet {
-			let newActive = !touches.isEmpty
-			if newActive != active {
-				active = newActive
+			if touches.isEmpty {
+				shameState = shameState.stateByEndingTouch
+			} else {
+				shameState = shameState.stateByBeginningTouch
 			}
-			updateShameState()
 		}
 	}
 	
 	override func motionBegan(motion: UIEventSubtype, withEvent event: UIEvent) {
-		if active && !audioPlayer.playing {
-			playAudio()
-		}
+		shameState = shameState.stateByShaking
 	}
 	
 	override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
@@ -138,13 +137,10 @@ final class ViewController: UIViewController, AVAudioPlayerDelegate {
 		return true
 	}
 	
-	override func shouldAutorotate() -> Bool {
-		return false
-	}
-	
 	private func updateInfoLabel() {
 		let text: String?
 		let deviceUpsideDown = UIDevice.currentDevice().orientation == .PortraitUpsideDown
+		let deviceIsPortrait = UIDevice.currentDevice().orientation.isPortrait
 		let transform = deviceUpsideDown ? CGAffineTransformMakeScale(-1, -1) : CGAffineTransformIdentity
 		switch shameState {
 		case .Shame:
@@ -160,7 +156,9 @@ final class ViewController: UIViewController, AVAudioPlayerDelegate {
 		}
 		self.infoLabel.attributedText = NSAttributedString(string: text ?? "", attributes: ViewController.infoAttr)
 		UIView.animateWithDuration(0.4, delay: 0, usingSpringWithDamping: 1.0, initialSpringVelocity: 0.7, options: .BeginFromCurrentState, animations: {
-			self.infoLabel.transform = transform
+			if deviceIsPortrait {
+				self.infoLabel.transform = transform
+			}
 			if let text = text {
 				self.infoLabel.alpha = 1
 			} else {
@@ -174,9 +172,6 @@ final class ViewController: UIViewController, AVAudioPlayerDelegate {
 	@objc private func deviceOrientationChanged() {
 		updateInfoLabel()
 	}
-	
-	override func supportedInterfaceOrientations() -> Int {
-		return UIInterfaceOrientation.Portrait.rawValue | UIInterfaceOrientation.PortraitUpsideDown.rawValue
-	}
+
 }
 
